@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>New Trip</h1>
+
+<form method="POST" action="{{ url_for('main.add_store')}}">
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Please enter your information:</legend>
+
+        {{ form.trip_type.label }}
+        {{ form.trip_type }}
+        <ul>
+        {% for error in form.trip_type.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.past_or_future.label }}
+        {{ form.past_or_future }}
+        <ul>
+        {% for error in form.past_or_future.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.country.label }}
+        {{ form.country }}
+        <ul>
+        {% for error in form.country.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.year.label }}
+        {{ form.year }}
+        <ul>
+        {% for error in form.year.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.trip_length.label }}
+        {{ form.trip_length }}
+        <ul>
+        {% for error in form.trip_length.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.highlight.label }}
+        {{ form.highlight }}
+        <ul>
+        {% for error in form.highlight.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.submit }}
+    </fieldset>
+</form>
+
+
+{% endblock %}

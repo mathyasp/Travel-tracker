@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, FloatField, SelectField, SubmitField, ValidationError
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, NumberRange
-from travel_app.models import Country, Trip, User
+from travel_app.models import Country, Trip, User, TripType, PastOrFuture, ClimateType
 
 class CountryForm(FlaskForm):
     name = StringField("Country Name", 
@@ -53,12 +53,10 @@ class TripForm(FlaskForm):
     highlight = StringField("Highlight", 
       validators=[
         DataRequired(), 
-        validate_time_format
       ])
     submit = SubmitField("Submit")
 
-    @staticmethod
-    def validate_time_format(form, field):
+    def validate_highlight(form, field):
       """Validate time format in the form 'Xd, Xw, Xm' (X days, X weeks, X months)"""
       time_units = field.data.split(',')
       for unit in time_units:

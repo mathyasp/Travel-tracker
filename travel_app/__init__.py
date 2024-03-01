@@ -1,7 +1,7 @@
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
-from grocery_app.models import User
-from grocery_app.extensions import app
+from travel_app.models import User
+from travel_app.extensions import app
 
 ###########################
 # Authentication

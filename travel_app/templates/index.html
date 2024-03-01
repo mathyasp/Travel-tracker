@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>My personal travel tracker</h1>
+
+<h2>My Trips</h2>
+
+{% for trip in all_trips %}
+<div class="trip">
+    <a href="/trip/{{ trip.id }}">{{ trip.country.name }}</a>
+    <p>Highlight of the trip: {{ trip.highlight}}</p>
+    <img src="{{ trip.country.img_url }}" alt="{{ trip.country.name }}">
+</div>
+{% endfor %}
+
+{% endblock %}

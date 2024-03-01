@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
-from grocery_app.config import Config
+from travel_app.config import Config
 import os
 
 app = Flask(__name__)
