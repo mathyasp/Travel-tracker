@@ -8,6 +8,10 @@ class SignUpForm(FlaskForm):
     username = StringField('User Name',
         validators=[DataRequired(), Length(min=3, max=50)])
     password = PasswordField('Password', validators=[DataRequired()])
+    name = StringField('Name',
+        validators=[DataRequired(), Length(min=3, max=50)])
+    profile_pic_url = StringField('Profile Picture URL',
+        validators=[DataRequired()])
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):

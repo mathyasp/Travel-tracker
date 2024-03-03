@@ -14,7 +14,9 @@ def signup():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(
             username=form.username.data,
-            password=hashed_password
+            password=hashed_password,
+            name=form.name.data,
+            profile_pic_url=form.profile_pic_url.data
         )
         db.session.add(user)
         db.session.commit()

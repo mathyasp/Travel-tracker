@@ -10,10 +10,10 @@ class CountryForm(FlaskForm):
         DataRequired(), 
         Length(min=2, max=50)
       ])
-    climate = StringField("Climate", 
+    climate = SelectField("Climate Type", 
+      choices=ClimateType.choices(), 
       validators=[
-        DataRequired(), 
-        Length(min=2, max=50)
+        DataRequired()
       ])
     language = StringField("Language", 
       validators=[

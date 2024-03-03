@@ -19,7 +19,7 @@ def index():
 def add_trip():
     form = TripForm()
     if form.validate_on_submit():
-        new_trip = Trip(
+        add_trip = Trip(
             trip_type=form.trip_type.data,
             past_or_future=form.past_or_future.data,
             country=form.country.data,
@@ -31,7 +31,7 @@ def add_trip():
         db.session.commit()
 
         flash("Your trip has been added!")
-        return redirect(url_for("main.trip_detail", trip_id=new_trip.id))
+        return redirect(url_for("main.trip_detail", trip_id=add_trip.id))
     return render_template("add_trip.html", form=form)
 
 @main.route("/add_country", methods=["GET", "POST"])

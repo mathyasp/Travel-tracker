@@ -8,6 +8,21 @@
     <fieldset>
         <legend>Enter your credentials</legend>
 
+        {{ form.name.label }}
+        {{ form.name }}
+        <ul>
+        {% for error in form.name.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+
+        {{ form.profile_pic_url.label }}
+        {{ form.profile_pic_url }}
+        <ul>
+        {% for error in form.profile_pic_url.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+
         {{ form.username.label }}
         {{ form.username }}
         <ul>
