@@ -69,7 +69,7 @@ class User(UserMixin, db.Model):
   def __repr__(self):
     return f"<User: {self.username}>"
 
-user_trips_table = db.Table("user_trips",
+user_trips_table = db.Table("user_trips_table",
     db.Column("user_id", db.Integer, db.ForeignKey("user.id")),
     db.Column("trip_id", db.Integer, db.ForeignKey("trip.id")),
     PrimaryKeyConstraint("user_id", "trip_id")

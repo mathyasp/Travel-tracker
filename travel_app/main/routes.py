@@ -29,7 +29,9 @@ def add_trip():
         )
         db.session.add(new_trip)
         db.session.commit()
-        return redirect(url_for("main.index"))
+
+        flash("Your trip has been added!")
+        return redirect(url_for("main.trip_detail", trip_id=new_trip.id))
     return render_template("add_trip.html", form=form)
 
 @main.route("/add_country", methods=["GET", "POST"])
