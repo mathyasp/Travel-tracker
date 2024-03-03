@@ -23,15 +23,16 @@ def add_trip():
             trip_type=form.trip_type.data,
             past_or_future=form.past_or_future.data,
             country=form.country.data,
-            year=form.year.data,
+            date_arrived=form.date_arrived.data,
             trip_length=form.trip_length.data,
             highlight=form.highlight.data,
+            user_id=current_user.id,
         )
-        db.session.add(new_trip)
+        db.session.add(add_trip)
         db.session.commit()
 
         flash("Your trip has been added!")
-        return redirect(url_for("main.trip_detail", trip_id=add_trip.id))
+        return redirect(url_for("main.trip_page", trip_id=add_trip.id))
     return render_template("add_trip.html", form=form)
 
 @main.route("/add_country", methods=["GET", "POST"])
@@ -49,3 +50,35 @@ def add_country():
         db.session.commit()
         return redirect(url_for("main.index"))
     return render_template("add_country.html", form=form)
+
+@main.route("/trip/<trip_id>")
+def trip_page(trip_id):
+    trip = Trip.query.get(trip_id)
+    form = TripForm(obj=trip)
+
+    if form.validate_on_submit():
+        trip.trip_type = form.trip_type.data
+        trip.past_or_future = form.past_or_future.data
+        trip.country = form.country.data
+        trip.date_arrived = form.date_arrived.data
+        trip.trip_length = form.trip_length.data
+        trip.highlight = form.highlight.data
+        db.session.commit()
+        flash("Your trip has been updated!")
+        return redirect(url_for("main.trip_page", trip_id=trip.id))
+    return render_template("trip_page.html", trip=trip, form=form)
+
+@main.route("/country/<country_id>")
+def country_page(country_id):
+    country = Country.query.get(country_id)
+    form = CountryForm(obj=country)
+
+    if form.validate_on_submit():
+        country.name = form.name.data
+        country.climate = form.climate.data
+        country.language = form.language.data
+        country.img_url = form.img_url.data
+        db.session.commit()
+        flash("Your country has been updated!")
+        return redirect(url_for("main.country_page", country_id=country.id))
+    return render_template("country_page.html", country=country, form=form)

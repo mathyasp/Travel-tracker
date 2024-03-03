@@ -28,9 +28,10 @@ class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     trip_type = db.Column(db.Enum(TripType), nullable=False)
     past_or_future = db.Column(db.Enum(PastOrFuture), nullable=False)
+    country_id = db.Column(db.Integer, db.ForeignKey("country.id"))
     country = db.relationship("Country", back_populates="trips")
-    year = db.Column(db.Integer, nullable=False)
-    trip_length = db.Column(db.Integer, nullable=False)
+    date_arrived = db.Column(db.Date, nullable=False)
+    trip_length = db.Column(db.String, nullable=False)
     highlight = db.Column(db.String(200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     users = db.relationship("User", secondary="user_trips_table", back_populates="trips_taken")
@@ -46,7 +47,6 @@ class Country(db.Model):
     climate = db.Column(db.Enum(ClimateType), nullable=False)
     language = db.Column(db.String(50), nullable=False)
     img_url = db.Column(URLType)
-    trip_id = db.Column(db.Integer, db.ForeignKey("trip.id"), nullable=False)
     trips = db.relationship("Trip", back_populates="country")
 
     def __str__(self):

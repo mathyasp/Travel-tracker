@@ -32,10 +32,10 @@
         {% endfor %}
         </ul>
 
-        {{ form.year.label }}
-        {{ form.year }}
+        {{ form.date_arrived.label }}
+        {{ form.date_arrived }}
         <ul>
-        {% for error in form.year.errors %}
+        {% for error in form.date_arrived.errors %}
             <li class="error">{{ error }}</li>
         {% endfor %}
         </ul>

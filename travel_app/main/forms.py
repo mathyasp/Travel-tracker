@@ -41,29 +41,30 @@ class TripForm(FlaskForm):
       query_factory=lambda: Country.query, 
       allow_blank=False, 
       get_label="name")
-    year = DateField("Year", 
+    date_arrived = DateField("Date Arrived", 
       validators=[
         DataRequired()
       ])
-    trip_length = FloatField("Trip Length", 
+    trip_length = StringField("Trip Length", 
       validators=[
-        DataRequired(), 
-        NumberRange(min=1, max=365)
+        DataRequired(),
       ])
     highlight = StringField("Highlight", 
       validators=[
-        DataRequired(), 
+        DataRequired(),
+        Length(min=2, max=200)
       ])
     submit = SubmitField("Submit")
 
-    def validate_highlight(form, field):
-      """Validate time format in the form 'Xd, Xw, Xm' (X days, X weeks, X months)"""
-      time_units = field.data.split(',')
+    def validate_trip_length(form, field):
+      """Validate time format in the form '7 days', '2 weeks', '1 month and 5 days'"""
+      time_units = field.data.split('and')
       for unit in time_units:
         unit = unit.strip()
-        if not (unit.endswith('d') or unit.endswith('w') or unit.endswith('m')):
-          raise ValidationError('Time must be in the format "Xd, Xw, Xm"')
+        number, time_unit = unit.split(' ')
+        if not (time_unit in ['day', 'days', 'week', 'weeks', 'month', 'months']):
+          raise ValidationError('Time must be in the format "7 days", "2 weeks", "1 month and 5 days"')
         try:
-          int(unit[:-1])
+          int(number)
         except ValueError:
-          raise ValidationError('Time must be in the format "Xd, Xw, Xm"')
+          raise ValidationError('Time must be in the format "7 days", "2 weeks", "1 month and 5 days"')
