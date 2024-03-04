@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>
+Welcome to {{ user.username }}'s profile.
+</p>
+
+<p>{{ user.name }}</p>
+<img src="{{ user.profile_pic_url }}" alt="Profile Picture" width="200" height="200">
+
+<p>
+  {{ user.username }}'s Trips Taken:
+
+  <ul>
+    {% for trip in user.trips_taken.all %}
+      <li>{{ trip.name }}</li>
+    {% endfor %}
+  </ul>
+</p>
+
+{% endblock %}

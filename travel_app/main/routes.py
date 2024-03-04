@@ -11,7 +11,6 @@ main = Blueprint("main", __name__)
 @main.route("/")
 def index():
     all_trips = Trip.query.all()
-    print(current_user)
     return render_template("index.html", all_trips=all_trips)
 
 @main.route("/add_trip", methods=["GET", "POST"])
@@ -20,6 +19,7 @@ def add_trip():
     form = TripForm()
     if form.validate_on_submit():
         add_trip = Trip(
+            trip_name=form.trip_name.data,
             trip_type=form.trip_type.data,
             past_or_future=form.past_or_future.data,
             country=form.country.data,
@@ -51,24 +51,28 @@ def add_country():
         return redirect(url_for("main.index"))
     return render_template("add_country.html", form=form)
 
-@main.route("/trip/<trip_id>")
+@main.route("/trip/<trip_id>", methods=['GET', 'POST'])
 def trip_page(trip_id):
     trip = Trip.query.get(trip_id)
     form = TripForm(obj=trip)
 
     if form.validate_on_submit():
+        trip.trip_name = form.trip_name.data
         trip.trip_type = form.trip_type.data
         trip.past_or_future = form.past_or_future.data
         trip.country = form.country.data
         trip.date_arrived = form.date_arrived.data
         trip.trip_length = form.trip_length.data
         trip.highlight = form.highlight.data
+
         db.session.commit()
+
         flash("Your trip has been updated!")
-        return redirect(url_for("main.trip_page", trip_id=trip.id))
+        return redirect(url_for("main.trip_page", trip_id=trip_id))
+        
     return render_template("trip_page.html", trip=trip, form=form)
 
-@main.route("/country/<country_id>")
+@main.route("/country/<country_id>", methods=['GET', 'POST'])
 def country_page(country_id):
     country = Country.query.get(country_id)
     form = CountryForm(obj=country)
@@ -82,3 +86,8 @@ def country_page(country_id):
         flash("Your country has been updated!")
         return redirect(url_for("main.country_page", country_id=country.id))
     return render_template("country_page.html", country=country, form=form)
+
+@main.route('/user_page/<username>')
+def user_page(username):
+    user = User.query.filter_by(username=username).one()
+    return render_template('user_page.html', user=user)

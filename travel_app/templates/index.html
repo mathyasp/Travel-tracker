@@ -7,7 +7,9 @@
 
 {% for trip in all_trips %}
 <div class="trip">
+    <h2>{{ trip.trip_name }}</h2>
     <a href="/trip/{{ trip.id }}">{{ trip.country.name }}</a>
+    <p>{{ trip.past_or_future }} trip</p>
     <p>Highlight of the trip: {{ trip.highlight}}</p>
     <img src="{{ trip.country.img_url }}" alt="{{ trip.country.name }}">
 </div>

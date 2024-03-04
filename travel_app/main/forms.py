@@ -27,6 +27,11 @@ class CountryForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class TripForm(FlaskForm):
+    trip_name = StringField("Trip Name",
+      validators=[
+        DataRequired(),
+        Length(min=2, max=50)
+      ])
     trip_type = SelectField("Trip Type", 
       choices=TripType.choices(), 
       validators=[

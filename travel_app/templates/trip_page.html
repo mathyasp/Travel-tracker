@@ -3,6 +3,8 @@
 
 <h1>Trip to - <a href="{{ url_for('main.country_page', country_id=trip.country.id) }}">{{ trip.country.name }}</a></h1>
 
+<h1>{{ trip.trip_name }}</h1>
+
 <p><img src="{{ trip.country.img_url }}" width="250px" height="250px"></p>
 
 <p><strong>Date of Arrival</strong> {{ trip.date_arrived }}</p>
@@ -11,64 +13,57 @@
 
 <p><strong> {{ trip.past_or_future }}</strong> trip</p>
 
+<p><strong>Highlight</strong> {{ trip.highlight }}</p>
 
+{% if current_user.is_authenticated %}
 <h2>Edit Trip</h2>
 
-<form method="POST" action="{{ url_for('main.add_trip')}}">
-    {{ form.hidden_tag() }}
+<form method="POST" action="{{ url_for('main.trip_page', trip_id=trip_id) }}">
+    {{ form.csrf_token }}
     <fieldset>
         <legend>Please enter your information:</legend>
 
-        {{ form.trip_type.label }}
-        {{ form.trip_type }}
-        <ul>
-        {% for error in form.trip_type.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
+        {{ form.trip_name.label }}
+        {{ form.trip_name }}
 
         {{ form.past_or_future.label }}
         {{ form.past_or_future }}
-        <ul>
-        {% for error in form.past_or_future.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
 
         {{ form.country.label }}
         {{ form.country }}
-        <ul>
-        {% for error in form.country.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
 
         {{ form.date_arrived.label }}
         {{ form.date_arrived }}
-        <ul>
-        {% for error in form.date_arrived.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
 
         {{ form.trip_length.label }}
         {{ form.trip_length }}
-        <ul>
-        {% for error in form.trip_length.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
 
         {{ form.highlight.label }}
         {{ form.highlight }}
-        <ul>
-        {% for error in form.highlight.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
+
+        {{ form.submit }}
+
+        {{ form.trip_type.label }}
+        {{ form.trip_type }}
+
+        {{ form.past_or_future.label }}
+        {{ form.past_or_future }}
+
+        {{ form.country.label }}
+        {{ form.country }}
+
+        {{ form.date_arrived.label }}
+        {{ form.date_arrived }}
+
+        {{ form.trip_length.label }}
+        {{ form.trip_length }}
+
+        {{ form.highlight.label }}
+        {{ form.highlight }}
 
         {{ form.submit }}
     </fieldset>
 </form>
+{% endif %}
 
 {% endblock %}

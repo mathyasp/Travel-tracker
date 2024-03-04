@@ -3,10 +3,18 @@
 
 <h1>New Trip</h1>
 
-<form method="POST" action="{{ url_for('main.add_trip')}}">
-    {{ form.hidden_tag() }}
+<form method="POST" action="{{ url_for('main.add_trip') }}">
+    {{ form.csrf_token }}
     <fieldset>
         <legend>Please enter your information:</legend>
+
+        {{ form.trip_name.label }}
+        {{ form.trip_name }}
+        <ul>
+        {% for error in form.trip_name.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
 
         {{ form.trip_type.label }}
         {{ form.trip_type }}
