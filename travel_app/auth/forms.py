@@ -6,10 +6,17 @@ from travel_app import bcrypt
 
 class SignUpForm(FlaskForm):
     username = StringField('User Name',
-        validators=[DataRequired(), Length(min=3, max=50)])
-    password = PasswordField('Password', validators=[DataRequired()])
+        validators=[
+            DataRequired(), 
+            Length(min=3, max=50)
+        ])
+    password = PasswordField('Password', 
+        validators=[DataRequired()])
     name = StringField('Name',
-        validators=[DataRequired(), Length(min=3, max=50)])
+        validators=[
+            DataRequired(), 
+            Length(min=3, max=50)
+        ])
     profile_pic_url = StringField('Profile Picture URL',
         validators=[DataRequired()])
     submit = SubmitField('Sign Up')
@@ -21,7 +28,10 @@ class SignUpForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     username = StringField('User Name',
-        validators=[DataRequired(), Length(min=3, max=50)])
+        validators=[
+            DataRequired(), 
+            Length(min=3, max=50)
+        ])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Log In')
 
