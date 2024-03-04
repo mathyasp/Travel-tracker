@@ -10,8 +10,8 @@ main = Blueprint("main", __name__)
 
 @main.route("/")
 def index():
-    all_trips = Trip.query.all()
-    return render_template("index.html", all_trips=all_trips)
+    all_countries = Country.query.all()
+    return render_template("index.html", all_countries=all_countries)
 
 @main.route("/add_trip", methods=["GET", "POST"])
 @login_required
@@ -28,6 +28,7 @@ def add_trip():
             highlight=form.highlight.data,
             user_id=current_user.id,
         )
+        current_user.trips_taken.append(add_trip)
         db.session.add(add_trip)
         db.session.commit()
 
@@ -64,6 +65,7 @@ def trip_page(trip_id):
         trip.date_arrived = form.date_arrived.data
         trip.trip_length = form.trip_length.data
         trip.highlight = form.highlight.data
+        trip.users = form.users.data
 
         db.session.commit()
 
@@ -88,6 +90,7 @@ def country_page(country_id):
     return render_template("country_page.html", country=country, form=form)
 
 @main.route('/user_page/<username>')
+@login_required
 def user_page(username):
     user = User.query.filter_by(username=username).one()
     return render_template('user_page.html', user=user)

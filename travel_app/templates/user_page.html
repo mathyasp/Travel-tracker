@@ -11,12 +11,11 @@ Welcome to {{ user.username }}'s profile.
 
 <p>
   {{ user.username }}'s Trips Taken:
-
-  <ul>
-    {% for trip in user.trips_taken.all %}
-      <li>{{ trip.name }}</li>
-    {% endfor %}
-  </ul>
+  
+  {% for trip in user.trips_taken %}
+    <h2><a href="/trip/{{ trip.id }}">{{ trip.trip_name }}</a></h2>
+    <img src="{{ trip.country.img_url }}" alt="{{ trip.country.name }}" width="50%">
+  {% endfor %}
 </p>
 
 {% endblock %}

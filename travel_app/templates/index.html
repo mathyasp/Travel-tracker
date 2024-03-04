@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>My personal travel tracker</h1>
+<h1>Personal travel tracker</h1>
 
-<h2>My Trips</h2>
+<h2>Countries</h2>
 
-{% for trip in all_trips %}
-<div class="trip">
-    <h2>{{ trip.trip_name }}</h2>
-    <a href="/trip/{{ trip.id }}">{{ trip.country.name }}</a>
-    <p>{{ trip.past_or_future }} trip</p>
-    <p>Highlight of the trip: {{ trip.highlight}}</p>
-    <img src="{{ trip.country.img_url }}" alt="{{ trip.country.name }}">
-</div>
+{% for country in all_countries %}
+    <h3><a href="/country/{{ country.id }}"> {{ country.name }}</a></h3>
+    <img src="{{ country.img_url }}" alt="{{ country.name }}" width="50%">
+    <h4>Trips: </h4>
+    <ul>
+        {% for trip in country.trips %}
+            <li><a href="/trip/{{ trip.id }}">{{ trip.trip_name }}</a></li>
+        {% endfor %}
+    </ul>
 {% endfor %}
 
 {% endblock %}

@@ -9,7 +9,14 @@
 
 <p><strong>Language:</strong> {{ country.language }}</p>
 
+<h4>Trips: </h4>
+    <ul>
+        {% for trip in country.trips %}
+            <li><a href="/trip/{{ trip.id }}">{{ trip.trip_name }}</a></li>
+        {% endfor %}
+    </ul>
 
+{% if current_user.is_authenticated %}
 <h2>Edit Country</h2>
 
 <form method="POST" action="{{ url_for('main.add_country')}}">
@@ -33,5 +40,6 @@
         {{ form.submit }}
     </fieldset>
 </form>
+{% endif %}
 
 {% endblock %}

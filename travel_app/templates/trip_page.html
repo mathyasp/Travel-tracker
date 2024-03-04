@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Trip to - <a href="{{ url_for('main.country_page', country_id=trip.country.id) }}">{{ trip.country.name }}</a></h1>
+<h1><a href="/country/{{ trip.country.id }}" >{{ trip.trip_name }}</a></h1>
 
-<h1>{{ trip.trip_name }}</h1>
-
-<p><img src="{{ trip.country.img_url }}" width="250px" height="250px"></p>
+<p><img src="{{ trip.country.img_url }}" width="100%"></p>
 
 <p><strong>Date of Arrival</strong> {{ trip.date_arrived }}</p>
 
