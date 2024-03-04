@@ -211,6 +211,8 @@ class MainTests(unittest.TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertIn('/login?next=%2Fadd_trip', response.location)
 
+    
+
     def test_add_country(self):
         """Test adding a country."""
 

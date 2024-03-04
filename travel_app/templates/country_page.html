@@ -13,41 +13,22 @@
 <h2>Edit Country</h2>
 
 <form method="POST" action="{{ url_for('main.add_country')}}">
-    {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
     <fieldset>
         <legend>Please enter your information:</legend>
 
         {{ form.name.label }}
         {{ form.name }}
-        <ul>
-        {% for error in form.name.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
 
         {{ form.climate.label }}
         {{ form.climate }}
-        <ul>
-        {% for error in form.climate.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
+   
 
         {{ form.language.label }}
         {{ form.language }}
-        <ul>
-        {% for error in form.language.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
 
         {{ form.img_url.label }}
         {{ form.img_url }}
-        <ul>
-        {% for error in form.img_url.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
 
         {{ form.submit }}
     </fieldset>
