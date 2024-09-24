@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, FloatField, SelectField, SubmitField, ValidationError
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import DataRequired, Length, NumberRange
 from travel_app.models import Country, Trip, User, TripType, PastOrFuture, ClimateType
 
@@ -59,6 +59,11 @@ class TripForm(FlaskForm):
         DataRequired(),
         Length(min=2, max=200)
       ])
+    users = QuerySelectMultipleField(
+        "Users",
+        query_factory=lambda: User.query,
+        get_label="username"
+    )
     submit = SubmitField("Submit")
 
     def validate_trip_length(form, field):

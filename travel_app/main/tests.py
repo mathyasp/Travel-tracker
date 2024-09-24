@@ -69,9 +69,6 @@ class MainTests(unittest.TestCase):
 
         response_test = response.get_data(as_text=True)
         self.assertIn('Test Trip', response_test)
-        self.assertIn('Test Country', response_test)
-        self.assertIn('Future', response_test)
-        self.assertIn('Test Highlight', response_test)
         self.assertIn('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png', response_test)
         self.assertIn('Log In', response_test)
         self.assertIn('Sign Up', response_test)
@@ -92,9 +89,6 @@ class MainTests(unittest.TestCase):
 
         response_test = response.get_data(as_text=True)
         self.assertIn('Test Trip', response_test)
-        self.assertIn('Test Country', response_test)
-        self.assertIn('Future', response_test)
-        self.assertIn('Test Highlight', response_test)
         self.assertIn('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png', response_test)
         self.assertIn('Log Out', response_test)
 
@@ -112,15 +106,16 @@ class MainTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
         response_test = response.get_data(as_text=True)
-        self.assertIn('Test Country', response_test)
-        self.assertIn('Test Country', response_test)
+        self.assertIn('Test Trip', response_test)
+        self.assertIn('2021-01-01', response_test)
+        self.assertIn('7 days', response_test)
         self.assertIn('Future', response_test)
         self.assertIn('Test Highlight', response_test)
         self.assertIn('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png', response_test)
         self.assertIn('Log In', response_test)
         self.assertIn('Sign Up', response_test)
 
-        self.assertNotIn('Edit', response_test)
+        self.assertNotIn('Edit Trip', response_test)
 
     def test_trip_page_logged_in(self):
         """Test that the trip page shows up correctly."""

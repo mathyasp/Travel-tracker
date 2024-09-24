@@ -1,0 +1,25 @@
+<form method="POST" action="{{ url_for('main.send_email') }}">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Send Email</legend>
+        
+        {{ form.email_address.label }}
+        {{ form.email_address }}
+        <ul>
+        {% for error in form.email_address.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+        
+        {{ form.message.label }}
+        {{ form.message }}
+        <ul>
+        {% for error in form.message.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        
+        {{ form.submit() }}
+    </fieldset>
+</form>
+
+{% endblock %}
