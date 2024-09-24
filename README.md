@@ -1,10 +1,14 @@
 # Final Project for ACS-1220 Authentication and Associations 
 
-## How to Run
+## How to Run (without docker)
 - Clone the repo
 - Make sure the virtual environment is activated by running `source venv/bin/activate`
 - Install the dependencies by running `pip install -r requirements.txt`
 - Finally, open the app by running `python app.py`
+
+## How to Run (with docker)
+- Clone the repo
+- Build and open the app by running `docker-compose up`
 
 ## Tests passing
 ### Auth Tests
